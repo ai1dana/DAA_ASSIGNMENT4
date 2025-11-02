@@ -2,6 +2,8 @@ package com.aitu.graph.dagsp;
 
 import java.util.Arrays;
 
+
+
 public class PathResult {
     public final double[] dist;
     public final int[] prev;

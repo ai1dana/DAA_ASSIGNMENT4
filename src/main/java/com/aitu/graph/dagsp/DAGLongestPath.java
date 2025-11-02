@@ -16,6 +16,8 @@ public class DAGLongestPath {
         if (topoResult == null) {
             System.out.println("Error: The graph contains a cycle. Shortcuts are impossible");
             return null;
+
+
         }
 
         List<Integer> order = topoResult.getOrder();
