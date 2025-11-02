@@ -1,6 +1,5 @@
 package com.aitu.core;
 
-
 public class Edge {
     private final int from;
     private final int to;
@@ -12,13 +11,20 @@ public class Edge {
         this.weight = weight;
     }
 
-    public int getFrom() { return from; }
-    public int getTo() { return to; }
-    public double getWeight() { return weight; }
+    public int getFrom() {
+        return from;
+    }
+
+    public int getTo() {
+        return to;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
 
     @Override
     public String toString() {
-        return from + " -> " + to + " (" + weight + ")";
+        return from + "->" + to + "(" + weight + ")";
     }
 }
-

@@ -5,9 +5,7 @@ import com.aitu.core.Edge;
 
 import java.util.*;
 
-
 public class KahnTopologicalSort {
-
 
     public TopologicalResult run(DirectedGraph graph) {
         int n = graph.size();
@@ -40,7 +38,7 @@ public class KahnTopologicalSort {
         }
 
         if (topologicalOrder.size() != n) {
-            throw new IllegalArgumentException("The graph contains a cycle, topological sorting is not possible");
+            return null;
         }
 
         return new TopologicalResult(topologicalOrder);

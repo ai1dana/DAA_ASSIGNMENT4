@@ -1,11 +1,10 @@
-package com.aitu.algorithms.scc;
+package com.aitu.graph.scc;
 
 import com.aitu.core.DirectedGraph;
 import com.aitu.core.Edge;
 import com.aitu.metrics.PerformanceTracker;
 
 import java.util.*;
-
 
 public class TarjanSCC {
     private int[] tin, low;
@@ -19,7 +18,6 @@ public class TarjanSCC {
         this.stack = new ArrayDeque<>();
     }
 
-
     public SCCResult run(DirectedGraph g) {
         int n = g.size();
         tin = new int[n];
@@ -29,17 +27,14 @@ public class TarjanSCC {
         timer = 0;
         SCCResult result = new SCCResult();
 
-
         metrics.reset();
         metrics.start();
-
 
         for (int v = 0; v < n; v++) {
             if (tin[v] == -1) {
                 dfs(v, g, result);
             }
         }
-
         metrics.stop();
         return result;
     }
@@ -50,11 +45,9 @@ public class TarjanSCC {
         stack.push(v);
         onStack[v] = true;
 
-
         for (Edge e : g.edgesFrom(v)) {
             metrics.inc("dfs_edge");
             int to = e.getTo();
-
             if (tin[to] == -1) {
                 dfs(to, g, result);
                 low[v] = Math.min(low[v], low[to]);
