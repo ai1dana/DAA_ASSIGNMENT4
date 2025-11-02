@@ -2,11 +2,8 @@ package com.aitu;
 
 import com.aitu.core.DirectedGraph;
 import com.aitu.io.CSVGraphIO;
-import com.aitu.algorithms.scc.TarjanSCC;
-import com.aitu.algorithms.scc.SCCResult;
-import com.aitu.algorithms.scc.CondensationGraph;
-
-import java.util.List;
+import com.aitu.graph.topo.KahnTopologicalSort;
+import com.aitu.graph.topo.TopologicalResult;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -16,21 +13,10 @@ public class Main {
         System.out.println("=== GRAPH FROM CSV ===");
         System.out.println(graph);
 
-        TarjanSCC tarjan = new TarjanSCC();
-        SCCResult sccResult = tarjan.run(graph);
-        System.out.println("=== SCC (Tarjan) ===");
-        System.out.println("Found " + sccResult.count() + " strongly connected components.");
-        for (List<Integer> component : sccResult.getComponents()) {
-            System.out.println(component);
-        }
+        KahnTopologicalSort topoSort = new KahnTopologicalSort();
+        TopologicalResult result = topoSort.run(graph);
 
-        DirectedGraph dag = CondensationGraph.build(graph, sccResult);
-        System.out.println("=== Condensation Graph (DAG) ===");
-        System.out.println(dag);
-
-        System.out.println("=== Performance Metrics ===");
-        System.out.println("Time elapsed: " + tracker.elapsedNanos() + " ns");
-        System.out.println("DFS visits: " + tracker.get("dfs_visit"));
-        System.out.println("DFS edges: " + tracker.get("dfs_edge"));
+        System.out.println("=== Topological Sort (Kahn's Algorithm) ===");
+        System.out.println(result);
     }
 }
