@@ -38,7 +38,7 @@ public class KahnTopologicalSort {
         }
 
         if (topologicalOrder.size() != n) {
-            throw new IllegalArgumentException("The graph contains a cycle, topological sorting is not possible.");
+            return null;
         }
 
         return new TopologicalResult(topologicalOrder);

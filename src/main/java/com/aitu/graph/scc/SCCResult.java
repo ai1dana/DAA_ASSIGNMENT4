@@ -1,4 +1,4 @@
-package com.aitu.algorithms.scc;
+package com.aitu.graph.scc;
 
 import java.util.ArrayList;
 import java.util.List;

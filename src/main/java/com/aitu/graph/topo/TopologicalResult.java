@@ -18,4 +18,3 @@ public class TopologicalResult {
         return order.toString();
     }
 }
-
