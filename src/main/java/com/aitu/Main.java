@@ -6,17 +6,21 @@ import com.aitu.graph.topo.KahnTopologicalSort;
 import com.aitu.graph.topo.TopologicalResult;
 
 public class Main {
+
     public static void main(String[] args) throws Exception {
         String csvPath = "data/inputs/sample_graph.csv";
 
-        DirectedGraph graph = CSVGraphIO.readGraph(csvPath, 8);
+        DirectedGraph graph = CSVGraphIO.readGraph(csvPath, 9);
         System.out.println("=== GRAPH FROM CSV ===");
         System.out.println(graph);
 
         KahnTopologicalSort topoSort = new KahnTopologicalSort();
-        TopologicalResult result = topoSort.run(graph);
-
-        System.out.println("=== Topological Sort (Kahn's Algorithm) ===");
-        System.out.println(result);
+        try {
+            TopologicalResult topoResult = topoSort.run(graph);
+            System.out.println("=== Topological Sort (Kahn's Algorithm) ===");
+            System.out.println(topoResult);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Ошибка: " + e.getMessage());
+        }
     }
 }
