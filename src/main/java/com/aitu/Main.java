@@ -71,5 +71,19 @@ public class Main {
         System.out.println("Time elapsed: " + tracker.elapsedNanos() + " ns");
         System.out.println("DFS visits: " + tracker.get("dfs_visit"));
         System.out.println("DFS edges: " + tracker.get("dfs_edge"));
+
+
+        System.out.println("\n=== Shortest Path in DAG ===");
+        DAGShortestPath shortest = new DAGShortestPath();
+        PathResult sp = shortest.run(graph, 0);
+        if (sp != null) System.out.println(sp);
+
+        System.out.println("\n=== Longest Path (Critical Path) in DAG ===");
+        DAGLongestPath longest = new DAGLongestPath();
+        PathResult lp = longest.run(graph, 0);
+        if (lp != null) System.out.println(lp);
+
+
+
     }
 }

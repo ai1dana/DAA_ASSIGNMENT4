@@ -5,28 +5,35 @@ import com.aitu.core.Edge;
 import com.aitu.graph.topo.KahnTopologicalSort;
 import com.aitu.graph.topo.TopologicalResult;
 
-import java.util.Arrays;
+
+
+import java.util.List;
 
 public class DAGShortestPath {
 
-    public PathResult run(DirectedGraph graph, int source) {
+    public PathResult run(DirectedGraph graph, int start) {
+        KahnTopologicalSort topoSort = new KahnTopologicalSort();
+        TopologicalResult topoResult = topoSort.run(graph);
+
+        if (topoResult == null) {
+            System.out.println("Error: The graph contains a cycle. Shortcuts are impossible.");
+            return null;
+        }
+
+        List<Integer> order = topoResult.getOrder();
         int n = graph.size();
-        PathResult result = new PathResult();
-        result.dist = new double[n];
-        result.parent = new int[n];
-        Arrays.fill(result.dist, Double.POSITIVE_INFINITY);
-        Arrays.fill(result.parent, -1);
-        result.dist[source] = 0;
+        PathResult result = new PathResult(n);
+        result.dist[start] = 0.0;
 
-        TopologicalResult topoResult = new KahnTopologicalSort().run(graph);
-        int[] topoOrder = topoResult.getOrder().stream().mapToInt(Integer::intValue).toArray();
-
-        for (int v : topoOrder) {
-            if (result.dist[v] == Double.POSITIVE_INFINITY) continue;
-            for (Edge e : graph.edgesFrom(v)) {
-                if (result.dist[e.getTo()] > result.dist[v] + e.getWeight()) {
-                    result.dist[e.getTo()] = result.dist[v] + e.getWeight();
-                    result.parent[e.getTo()] = v;
+        for (int u : order) {
+            if (result.dist[u] != Double.POSITIVE_INFINITY) {
+                for (Edge e : graph.edgesFrom(u)) {
+                    int v = e.getTo();
+                    double weight = e.getWeight();
+                    if (result.dist[v] > result.dist[u] + weight) {
+                        result.dist[v] = result.dist[u] + weight;
+                        result.prev[v] = u;
+                    }
                 }
             }
         }
