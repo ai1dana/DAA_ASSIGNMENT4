@@ -25,6 +25,8 @@ class GraphPerformanceTest {
             if (topoResult == null) {
                 System.out.println("Warning: The graph contains a cycle. Skipping shortest and longest path algorithms.");
                 continue;
+
+
             }
 
             DAGShortestPath dagShortestPath = new DAGShortestPath();

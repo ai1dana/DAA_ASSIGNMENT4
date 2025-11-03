@@ -3,6 +3,7 @@ package com.aitu.graph.generator;
 import com.aitu.core.DirectedGraph;
 import com.aitu.core.Edge;
 
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
