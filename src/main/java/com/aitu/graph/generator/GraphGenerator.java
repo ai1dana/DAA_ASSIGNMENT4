@@ -34,6 +34,7 @@ public class GraphGenerator {
             for (int i = 0; i < graph.size(); i++) {
                 for (Edge e : graph.edgesFrom(i)) {
                     writer.write(i + "," + e.getTo() + "," + e.getWeight() + "\n");
+
                 }
             }
         }
