@@ -14,6 +14,9 @@ public class TarjanSCC {
     private final PerformanceTracker metrics;
 
     public TarjanSCC(PerformanceTracker metrics) {
+        if (metrics == null) {
+            throw new IllegalArgumentException("PerformanceTracker must not be null.");
+        }
         this.metrics = metrics;
         this.stack = new ArrayDeque<>();
     }
