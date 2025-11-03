@@ -10,6 +10,7 @@ import com.aitu.graph.dagsp.DAGShortestPath;
 import com.aitu.graph.dagsp.DAGLongestPath;
 import com.aitu.graph.dagsp.PathResult;
 import com.aitu.metrics.PerformanceTracker;
+import com.aitu.metrics.PerformanceTrackerCSV;
 
 import java.util.List;
 
@@ -26,7 +27,6 @@ public class Main {
 
         TarjanSCC tarjan = new TarjanSCC(tracker);
         SCCResult sccResult = tarjan.run(graph);
-
         System.out.println("=== SCC (Tarjan) ===");
         System.out.println("Found " + sccResult.count() + " strongly connected components.");
         for (List<Integer> component : sccResult.getComponents()) {
@@ -52,7 +52,7 @@ public class Main {
                 System.out.println("Vertex " + i + ": Distance = " + shortestPathResult.dist[i]);
             }
         } else {
-            System.out.println("The shortest paths algorithm was omitted due to the impossibility of topological sorting.");
+            System.out.println("The shortest path algorithm was omitted due to the impossibility of topological sorting.");
         }
 
         if (topoResult != null) {
@@ -64,13 +64,15 @@ public class Main {
                 System.out.println("Vertex " + i + ": Distance = " + longestPathResult.dist[i]);
             }
         } else {
-            System.out.println("The algorithm of long paths was omitted due to the impossibility of topological sorting..");
+            System.out.println("The longest path algorithm was omitted due to the impossibility of topological sorting.");
         }
 
         System.out.println("=== Performance Metrics ===");
         System.out.println("Time elapsed: " + tracker.elapsedNanos() + " ns");
         System.out.println("DFS visits: " + tracker.get("dfs_visit"));
         System.out.println("DFS edges: " + tracker.get("dfs_edge"));
+
+        PerformanceTrackerCSV.saveMetricsToCSV(tracker, "data/outputs/metrics.csv");
 
 
         System.out.println("\n=== Shortest Path in DAG ===");
@@ -82,8 +84,6 @@ public class Main {
         DAGLongestPath longest = new DAGLongestPath();
         PathResult lp = longest.run(graph, 0);
         if (lp != null) System.out.println(lp);
-
-
 
     }
 }
