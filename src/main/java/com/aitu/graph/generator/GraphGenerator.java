@@ -20,8 +20,6 @@ public class GraphGenerator {
             int v = rand.nextInt(n);
             while (u == v) {
                 v = rand.nextInt(n);
-
-
             }
             double weight = rand.nextDouble() * 10;
             graph.addEdge(u, v, weight);
