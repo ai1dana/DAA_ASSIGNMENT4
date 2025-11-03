@@ -1,6 +1,7 @@
 package com.aitu;
 
 import com.aitu.core.DirectedGraph;
+import com.aitu.graph.chart.ChartGenerator;
 import com.aitu.io.CSVGraphIO;
 import com.aitu.graph.topo.KahnTopologicalSort;
 import com.aitu.graph.topo.TopologicalResult;
@@ -84,6 +85,9 @@ public class Main {
         DAGLongestPath longest = new DAGLongestPath();
         PathResult lp = longest.run(graph, 0);
         if (lp != null) System.out.println(lp);
+
+        ChartGenerator.generateTimeChart(tracker);
+
 
     }
 }
